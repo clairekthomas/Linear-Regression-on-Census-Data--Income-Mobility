@@ -1,26 +1,32 @@
-This notebook looks for correlations in income mobility and public (K-12) education spending. It uses income mobility data for people born in 1978-1983, and education spending data in a representative year for those subjects (1995). 
+**Short Summary**: 
+
+This work explores the connection between public (K-12) education spending reported in the US census and upward income mobility, as measured by the Opportunity Atlas. I account for fixed effects from gender and race and build a multivariate regression model that includes per-pupil spending and fraction of education revenue from local sources.
+
+White male students have a higher baseline liklihood of income mobility than any other group. Female students across races benefit more per dollar spent on their education than their male counterparts, though none reach the baseline of white males. Male students of color do not benefit from per pupil education spending, suggesting that expenditures in education do not address the barriers to mobility for these students. A future aim is to understand what public expenditures do impact social mobility for male students of color, and to identify types of public spending that would have a larger positive impact on POC and female students.
+
 
 **Motivation**: 
 
-Income mobility is the ability of an individual or family to improve (or lower) their economic status. The American Dream is that anyone, regardless of where they were born or what class they were born into, can attain their own version of success in a society where upward mobility is possible for everyone. Economic mobility is the bedrock of the American Dream. 
+Income mobility is the ability of an individual or family to change their economic status from childhood. The American Dream is that anyone, regardless of where they were born or what class they were born into, can attain their own version of success in a society where upward mobility is possible for everyone. Economic mobility is the bedrock of the American Dream. 
 
-It is well understood that overall economic mobility in the US has declined over the past century. The American public expects that public education spending supports income mobility. This notebook studies variations in income mobility on the basis of race, gender, and zip code, and looks for correlations between income mobility and education spending.
+It is well understood that overall economic mobility in the US has declined over the past century. The American public expects that public education spending supports income mobility. This study looks for correlations between income mobility and per-pupil spending in education. I account for fixed effects from gender and race and see significant differences in the impact of education funding based on population segmentation. This kind of analysis could support policymakers as they determine how to best allocate resources towards programs that level the playing field so that the American dream might be available to all. 
 
-**Goal**:
+**Method**:
 
-The goal of this study is to identify trends in education spending that correlate most strongly with a level playing field for all students. For example, the notebook identifies correlations between income mobility and per-pupil spending on particular education resources for zip codes throughout the US. It further explores differences in those correlations for students depending on their race and gender. 
+An Opportunity Insights analysis provides income mobility data for people born 1978-1983, broken down by location, gender and race. I use census data to determine education spending and revenue in 1995, a representative year when the subjects were in school. I use geopandas to generate heatmaps showing prominent features of each dataset.
 
-It is a given that income mobility depends on more than public education, and that K-12 education financing will itself correlate with factors that impact mobility beyond education expenses (eg, policing policy and neighborhood wealth). The differences in the correlation between student outcomes and education spending for students in the same zip code but different races and genders are the most telling features of this data. 
+I merge the datasets by county (FIPS) and plot correlations between income mobility and per-pupil spending on education for zip codes throughout the US for the subjects in question. 
 
-**Observations**
+To establish causal connection, I perform a multivariate regression that includes the fraction of school revenue obtained from local sources. This parameter relates to both regional wealth and tax policies in that area. For the population segments with clear dependence on per pupil spending, the inclusion improves the model but does not significantly reduce the coefficient that quantifies the dependence of income mobility on per pupil education spending. I suggest additional possible confounding variables that may further improve the analysis.
 
-Preliminary analysis shows a positive overall correlation between income mobility and education spending. That is, zip codes that spent more per pupil on education also saw a higher liklihood of income mobility. (That's great, it's the desired impact of a public education system.) 
 
-The likelihood of income mobility varies across race and gender. Female students generally benefit more per dollar spent on their education, while male students have a higher overall baseline liklihood of income mobility. Male students of color do not statistically significantly benefit from per pupil education spending. Education spending doesn't correlate with their success. 
+**Observation**
 
-To establish causal connection, I include in a linear regression the fraction of school revenue obtained from local sources. This parameter relates to both regional wealth and tax policies in that area. For many of the datasets with clear dependence on per pupil spending, the inclusion improves the model but does not significantly reduce the coefficient that quantifies the dependence of income mobility on per pupil education spending.  I suggest additional possible confounding variables that may further improve the analysis.
+I observe a positive overall correlation between income mobility and education spending. That is, zip codes that spent more per pupil on education also saw a higher liklihood of income mobility. (That's great, it's the desired impact of a public education system.) 
 
-A future aim is to identify types of spending that could have larger positive impact on POC and female students. The ideal is for all students to show the same benefit from education dollars that we currently observe in white students. This type of analysis may find application in education policy. 
+The likelihood of income mobility varies across race and gender. Female students generally benefit more per dollar spent on their education, while white male students have a higher overall baseline liklihood of income mobility. Male students of color do not benefit from per pupil education spending, suggesting that expenditures in education do not address the barriers to mobility for these students. 
+
+A future aim is to understand what public expenditures do impact social mobility for male students of color, and to identify types of public spending that would have a larger positive impact on POC and female students. The ideal is for all students to show the same benefit from education dollars that we currently observe in white students. 
 
 
 
